@@ -16,7 +16,7 @@ Este é um bot simples para o Telegram, desenvolvido em Python usando a bibliote
 
 - Python 3.10+
 - Biblioteca `python-telegram-bot` v20+
-- Chatgpt ('https://chatgpt.openai.com/')
+- Chatgpt ('https://chatgpt.com/')
 ---
 
 ## 📦 Instalação
