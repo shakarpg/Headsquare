@@ -1,13 +1,13 @@
 # 🤖 Headsquare Bot - Telegram
 
-Este é um bot simples para o Telegram, desenvolvido em Python usando a biblioteca [`python-telegram-bot`](https://github.com/python-telegram-bot/python-telegram-bot). Ele responde a comandos e mensagens de texto, servindo como base para projetos mais complexos de automação e atendimento.
+Este é um bot simples para o Telegram, desenvolvido em Python usando a biblioteca [`python-telegram-bot`](https://github.com/python-telegram-bot/python-telegram-bot) e Chatgpt. Ele responde a comandos e mensagens de texto, servindo como base para projetos mais complexos de automação e atendimento.
 
 ---
 
 ## 🚀 Funcionalidades
 
 - Responde ao comando `/start` com uma saudação personalizada.
-- Responde com `"Olá, mundo!"` a qualquer mensagem de texto enviada pelo usuário.
+- Responde  a qualquer mensagem de texto enviada pelo usuário.
 - Utiliza `run_polling()` para escutar e responder em tempo real.
 
 ---
