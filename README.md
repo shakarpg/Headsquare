@@ -28,25 +28,25 @@ Este repositório está em modo **privado**, garantindo que o token do bot e out
    cd nome-do-repositorio
    
 2.Crie um ambiente virtual:
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
+   python -m venv venv
+   source venv/bin/activate  # Linux/Mac
+   venv\Scripts\activate     # Windows
 
 3.Instale as dependências:
-pip install -r requirements.txt
+   pip install -r requirements.txt
 
 4.Crie um arquivo .env na raiz do projeto com o seguinte conteúdo:
-TELEGRAM_BOT_TOKEN=seu_token_aqui
+   TELEGRAM_BOT_TOKEN=seu_token_aqui
 
 5.No código Python, carregue o token usando python-dotenv:
-from dotenv import load_dotenv
-import os
+   from dotenv import load_dotenv
+   import os
 
-load_dotenv()
-TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+   load_dotenv()
+   TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 ▶️ Como executar
-python nome_do_arquivo.py
+   python nome_do_arquivo.py
 
 📄 Licença
-Este projeto é de uso privado e está sob a licença MIT. Consulte LICENSE se aplicável.
+   Este projeto é de uso privado e está sob a licença MIT. Consulte LICENSE se aplicável.
