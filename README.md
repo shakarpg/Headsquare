@@ -12,15 +12,6 @@ Este é um bot simples para o Telegram, desenvolvido em Python usando a bibliote
 
 ---
 
-## 🔒 Projeto Privado
-
-Este repositório está em modo **privado**, garantindo que o token do bot e outras informações sensíveis não sejam acessíveis publicamente. Mesmo assim, recomendamos:
-
-- **Não versionar diretamente tokens ou senhas.**
-- **Usar variáveis de ambiente** com um arquivo `.env` para segurança adicional.
-
----
-
 ## 🛠️ Tecnologias utilizadas
 
 - Python 3.10+
