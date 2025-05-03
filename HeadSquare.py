@@ -1,28 +1,55 @@
-from telegram import Update # type: ignore
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters # type: ignore
+import logging
+import openai
+from telegram import Update
+from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler, filters
 
-# Substitua pelo seu token do BotFather
-TOKEN = '7976061331:AAGRGBuoYFiKoWDnpnIgySIZ-7Ys4p91164'
+# Substitua com suas chaves
+TELEGRAM_TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN'
+OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY'
 
-# Função que responde ao comando /start
+openai.api_key = OPENAI_API_KEY
+
+# Armazena o histórico de conversa por usuário
+user_conversations = {}
+
+# Configura o log
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text('Olá! Eu sou Headsquare. Como posso ajudar?')
+    await update.message.reply_text("Olá! Sou um bot com inteligência do ChatGPT. Me pergunte o que quiser!")
 
-# Função que responde a qualquer mensagem
-async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text('Olá, mundo!')
+async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = str(update.message.from_user.id)
+    message = update.message.text
 
-def main():
-    # Cria a aplicação do bot
-    app = ApplicationBuilder().token(TOKEN).build()
+    # Recupera ou inicia o histórico
+    if user_id not in user_conversations:
+        user_conversations[user_id] = []
 
-    # Comando /start
+    user_conversations[user_id].append({"role": "user", "content": message})
+
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",  # ou "gpt-4" se você tiver acesso
+            messages=user_conversations[user_id],
+        )
+        reply = response['choices'][0]['message']['content']
+        user_conversations[user_id].append({"role": "assistant", "content": reply})
+        await update.message.reply_text(reply)
+    except Exception as e:
+        await update.message.reply_text("Ocorreu um erro ao acessar a OpenAI.")
+        logging.error(f"Erro na OpenAI: {e}")
+
+async def main():
+    app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+
     app.add_handler(CommandHandler("start", start))
-    # Responde a qualquer mensagem
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-    # Inicia o bot
-    app.run_polling()
+    print("Bot rodando...")
+    await app.run_polling()
 
 if __name__ == '__main__':
-    main()
+    import asyncio
+    asyncio.run(main())
+    
